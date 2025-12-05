@@ -18,8 +18,8 @@ if ($file) {
     exit;
 }
 
-// Sinon, liste simple des images du dossier uploads/
-$objects = $bucket->objects(['prefix' => 'uploads/']);
+// Sinon, liste simple des images du dossier
+$objects = $bucket->objects(['prefix' => BUCKET_FOLDER]);
 ?>
 
 <!DOCTYPE html>
@@ -43,11 +43,11 @@ $objects = $bucket->objects(['prefix' => 'uploads/']);
 <?php endif; ?>
 
 <?php if (!iterator_count($objects)): ?>
-    <p>Aucune image trouvée dans le dossier uploads/.</p>
+    <p>Aucune image trouvée dans le dossier <?=BUCKET_FOLDER?>.</p>
 
 <?php else: foreach ($objects as $object): ?>
     <?php
-    if (!str_starts_with($object->name(), 'uploads/')) continue;
+    if (!str_starts_with($object->name(), BUCKET_FOLDER)) continue;
 
     // URL signée courte (5 min suffisent pour affichage)
     $url = $object->signedUrl(new DateTime('+5 minutes'));

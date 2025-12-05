@@ -8,12 +8,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
     $file = $_FILES['image'];
 
     if ($file['error'] === UPLOAD_ERR_OK) {
-        $objectName = 'uploads/' . uniqid() . '_' . $file['name']; // on met dans un dossier "uploads/"
+        $objectName = BUCKET_FOLDER. uniqid() . '_' . $file['name']; // on met dans un dossier "uploads/"
 
         $stream = fopen($file['tmp_name'], 'r');
         $options = [
             'name' => $objectName,
-            'metadata' => ['contentType' => $file['type']]
+            'metadata' => ['contentType' => $file['type']],
         ];
 
         $bucket->upload($stream, $options);
@@ -45,6 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
 </form>
 
 <hr>
-<p><a href="index.php">Voir toutes les images uploadées (dossier uploads/)</a></p>
+<p><a href="index.php">Voir toutes les images uploadées (dossier <?=BUCKET_FOLDER?>)</a></p>
 </body>
 </html>
