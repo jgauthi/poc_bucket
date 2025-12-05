@@ -1,0 +1,16 @@
+{
+  "name": "jgauthi/template_php_poc",
+  "description": "Some usage with XXX",
+  "type": "library",
+  "homepage": "https://github.com/jgauthi/poc_PROJECT",
+  "require": {
+    "php": ">=8.4"
+  },
+  "autoload": {
+    "classmap": [ "src/" ]
+  },
+  "license": "GPL-3.0-only",
+  "authors": [
+    { "name": "jgauthi", "homepage": "https://github.com/jgauthi" }
+  ]
+}
