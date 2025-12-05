@@ -36,6 +36,12 @@ $objects = $bucket->objects(['prefix' => 'uploads/']);
 <h2>Images uploadées</h2>
 <p><a href="upload.php">← Retour upload</a></p>
 
+<?php if (!empty($_GET['deleted'])): ?>
+<p style="color: green;">
+    Fichier supprimé: <?= htmlspecialchars($_GET['deleted']) ?>
+</p>
+<?php endif; ?>
+
 <?php if (!iterator_count($objects)): ?>
     <p>Aucune image trouvée dans le dossier uploads/.</p>
 
@@ -53,8 +59,13 @@ $objects = $bucket->objects(['prefix' => 'uploads/']);
         <br>
         <small><?= htmlspecialchars(basename($object->name())) ?></small>
         <br>
+
         <a href="download.php?file=<?= urlencode($object->name()) ?>">Télécharger</a>
+        |
+        <a href="delete.php?file=<?= urlencode($object->name()) ?>"
+           onclick="return confirm('Supprimer ce fichier ?');">Supprimer</a>
     </div>
+
 <?php endforeach; endif; ?>
 
 </body>
