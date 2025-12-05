@@ -13,7 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
         $stream = fopen($file['tmp_name'], 'r');
         $options = [
             'name' => $objectName,
-            'metadata' => ['contentType' => $file['type']],
+            'metadata' => [
+                'metadata' => [
+                    'contentType' => $file['type'],
+                    'description' => 'Hello World',
+                    'originalFilename' => $file['name'],
+                ]
+            ]
         ];
 
         $bucket->upload($stream, $options);

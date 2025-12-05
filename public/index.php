@@ -51,9 +51,10 @@ $objects = $bucket->objects(['prefix' => BUCKET_FOLDER]);
 
     // URL signée courte (5 min suffisent pour affichage)
     $url = $object->signedUrl(new DateTime('+5 minutes'));
+    $originaleFilename = $object->info()['metadata']['originalFilename'] ?? basename($object->name());
     ?>
     <div style="display:inline-block; text-align:center;">
-        <a href="index.php?file=<?= urlencode($object->name()) ?>" target="_blank">
+        <a href="index.php?file=<?= urlencode($object->name()) ?>" target="_blank" title="<?=$originaleFilename?>">
             <img src="<?= $url ?>" alt="<?= basename($object->name()) ?>">
         </a>
         <br>
